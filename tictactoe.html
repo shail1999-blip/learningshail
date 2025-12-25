@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Close Button</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe with Celebration</title>
+    <link rel="stylesheet" href="tictactoe.css">
+</head>
+<body>
+   
+    
+    <div class="container">
+        <section>
+            <a href="/index.html" class="close">X</a>
+        </section>
+
+        <h1>Tic-Tac-Toe</h1>
+
+        <div class="score-board">
+            <div class="player-score">
+                <h2>Player X</h2>
+                <p>Score: <span id="score-x">0</span></p>
+                <p>Win Avg: <span id="avg-x">0%</span></p>
+            </div>
+            <div class="player-score">
+                <h2>Player O</h2>
+                <p>Score: <span id="score-o">0</span></p>
+                <p>Win Avg: <span id="avg-o">0%</span></p>
+            </div>
+        </div>
+        <div id="board" class="board">
+            <div class="cell" data-cell-index="0"></div>
+            <div class="cell" data-cell-index="1"></div>
+            <div class="cell" data-cell-index="2"></div>
+            <div class="cell" data-cell-index="3"></div>
+            <div class="cell" data-cell-index="4"></div>
+            <div class="cell" data-cell-index="5"></div>
+            <div class="cell" data-cell-index="6"></div>
+            <div class="cell" data-cell-index="7"></div>
+            <div class="cell" data-cell-index="8"></div>
+        </div>
+        <div id="status"></div>
+        <button id="restart">Restart Game</button>
+        <button id="reset-scores">Reset Scores</button>
+    </div>
+    <div id="celebration" class="celebration">
+        <h2>Congratulations!</h2>
+        <p>Player <span id="winner"></span> has won 2 games!</p>
+    </div>
+    <div id="game-over" class="game-over">
+        <h2>Game Over!</h2>
+        <p>Player <span id="final-winner"></span> has won 2 games!</p>
+        <button id="new-tournament">Start New Tournament</button>
+    </div>
+    <script src="tictactoe.js"></script>
+</body>
+</html>
+

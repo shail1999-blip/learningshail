@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="Memory.css">
+  
+</head>
+<body>
+    <div class="container">
+        <a class="close-btn" href="/index.html" onclick="closeGame()">
+        </a>
+        <h2 class="title">Memory Game</h2>
+        <div class="moves">Moves: <span id="moveCount">0</span></div>
+        <div class="grid" id="cardGrid"></div>
+        <div id="congratulations" class="congratulations hidden"></div>
+        <button id="newGameButton" class="new-game-button">New Game</button>
+        <button id="backToGamePageButton" class="back-to-game-button visible">Back to Game Page</button>
+    </div>
+<script src="Memory.js"></script>
+  
+</body>
+</html>

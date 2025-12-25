@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="Snake.css">
+</head>
+<body>
+  <div class="game-container">
+    <div class="header">
+      <h1>Snake Game</h1>
+      <div class="theme-selector">
+        <button class="theme-btn light active" data-theme="light" aria-label="Light theme"></button>
+        <button class="theme-btn dark" data-theme="dark" aria-label="Dark theme"></button>
+        <button class="theme-btn neon" data-theme="neon" aria-label="Neon theme"></button>
+      </div>
+    </div>
+    
+    <div class="settings-bar">
+      <div class="difficulty-selector">
+        <span class="settings-label">Difficulty:</span>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn active" data-difficulty="easy">Easy</button>
+          <button class="difficulty-btn" data-difficulty="medium">Medium</button>
+          <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="game-area">
+      <canvas id="gameCanvas" width="320" height="320"></canvas>
+      
+      <div class="stats">
+        <div class="stat-box">
+          <div class="stat-label">Score</div>
+          <div id="score" class="stat-value">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">High Score</div>
+          <div id="highScore" class="stat-value">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Time</div>
+          <div id="timer" class="stat-value">0s</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="pauseBtn" class="control-btn">
+        <span class="pause-icon">⏸️</span>
+        <span class="play-icon">▶️</span>
+      </button>
+      <button id="restartBtn" class="control-btn">🔄 Restart</button>
+    </div>
+
+    <div id="mobileControls" class="mobile-controls">
+      <button class="direction-btn up" data-direction="UP">↑</button>
+      <div class="horizontal-controls">
+        <button class="direction-btn left" data-direction="LEFT">←</button>
+        <button class="direction-btn down" data-direction="DOWN">↓</button>
+        <button class="direction-btn right" data-direction="RIGHT">→</button>
+      </div>
+    </div>
+    
+   
+
+  <!-- Game Over Modal -->
+  <div id="overlay" class="overlay">
+    <div class="game-over-modal">
+      <h2>Game Over!</h2>
+      <p id="finalScore"></p>
+      <div class="difficulty-tag" id="difficultyTag">Medium</div>
+      <button id="restartGameBtn" class="restart-btn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Start Screen Modal -->
+  <div id="startScreen" class="overlay active">
+    <div class="start-modal">
+      <h2>Snake Game</h2>
+      <div class="start-options">
+        <div class="option-group">
+          <h3>Select Difficulty</h3>
+          <div class="start-difficulty-buttons">
+            <button class="start-difficulty-btn active" data-difficulty="easy">Easy</button>
+            <button class="start-difficulty-btn" data-difficulty="medium">Medium</button>
+            <button class="start-difficulty-btn" data-difficulty="hard">Hard</button>
+          </div>
+          <div class="difficulty-description">
+            <p id="difficultyDesc">Slower speed, single growth, no obstacles</p>
+          </div>
+        </div>
+        
+        <div class="option-group">
+          <h3>Select Theme</h3>
+          <div class="start-theme-buttons">
+            <button class="start-theme-btn active" data-theme="light">
+              <span class="theme-preview light"></span>
+              <span>Light</span>
+            </button>
+            <button class="start-theme-btn" data-theme="dark">
+              <span class="theme-preview dark"></span>
+              <span>Dark</span>
+            </button>
+            <button class="start-theme-btn" data-theme="neon">
+              <span class="theme-preview neon"></span>
+              <span>Neon</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button id="startGameBtn" class="start-btn">Start Game</button>
+    </div>
+  </div>
+
+  <audio id="eatSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
+  <audio id="gameOverSound" src="https://actions.google.com/sounds/v1/cartoon/concussive_drum_hit.ogg" preload="auto"></audio>
+
+  <script src="Snake.js"></script>
+</body>
+</html>

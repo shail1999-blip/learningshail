@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen's Chess Game</title>
+    <link rel="stylesheet" href="Queenchess.css">
+</head>
+<body>
+    <div class="home-screen active" id="homeScreen">
+        <a class="close-btn" href="/index.html" onclick="closeGame()">
+        </a>
+        
+        <h1 class="game-title">Queen's Chess Game</h1>
+        <div class="best-scores">
+            <h2>Best Scores</h2>
+            <ol id="bestScoresList">
+                <!-- Best scores will be populated here -->
+            </ol>
+        </div>
+        <div class="controls">
+            <button onclick="startGame()">Start Game</button>
+        </div>
+    </div>
+
+    <div class="game-container" id="gameContainer">
+        <h1 class="game-title">Queen's Chess Game</h1>
+
+        <div class="game-info">
+            <div class="info-box">
+                Score: <span id="score">0</span>
+            </div>
+            <div class="info-box">
+                Best: <span id="bestScore">0</span>
+            </div>
+            <div class="info-box">
+                Moves: <span id="moves">10</span>
+            </div>
+            <div class="info-box">
+                Time: <span id="timer">30</span>s
+            </div>
+        </div>
+
+        <div class="board" id="board"></div>
+
+        <div class="controls">
+            <button onclick="resetGame()">New Game</button>
+            <button onclick="showHome()" class="home-btn">Home</button>
+            <button onclick="showBestScores()" class="best-score-btn">Best Scores</button>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div id="gameOver" class="game-over">
+        <h2>Game Over!</h2>
+        <p>Final Score: <span id="finalScore">0</span></p>
+        <p>Best Score: <span id="finalBestScore">0</span></p>
+        <div class="controls">
+            <button onclick="resetGame()">Play Again</button>
+            <button onclick="showHome()" class="home-btn">Home</button>
+        </div>
+    </div>
+    
+<script src="Queenchess.js"></script>
+   
+</body>
+</html>
