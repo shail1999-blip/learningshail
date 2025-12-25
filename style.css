@@ -1,0 +1,269 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    /* background-color: #f1f1f4;
+    color: #f5ecec; */
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #f6f3f6;
+    border-radius: 4px;
+    /* position: relative; */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #f4f0f0;
+    color: #fff;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: #151516;
+    color: #0e0909;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to Responsive, #f0eef3, #efeaed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25 px;
+}
+
+nav a {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #f6f0f0;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #f0e9f7;
+}
+
+main {
+    text-align: center;
+    padding-bottom: 13%;
+}
+
+.bckimg {
+
+    background-image: url('/bckimg.webp');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;    /* Scrolls with content (better for mobile performance) */
+  width: 100%;
+  height: 100vh;
+
+
+}
+
+.bckimg.responsive-image {
+    width: 100%;
+    /* default for small screens */
+    height: auto;
+}
+
+p {
+    font-size: 1rem;
+    /* margin-bottom: 32px; */
+}
+
+.feature {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.feature-item {
+
+    max-width: 300px;
+    height: 120px;
+    padding: 16px;
+    position: relative;
+    color: white;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(251, 251, 251, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item h3 {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.game button {
+    background-color: #44ccf1;
+    color: #fff;
+}
+
+footer {
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+
+
+}
+
+footer nav {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+footer nav a {
+    color: #ccc;
+}
+
+footer nav a:hover {
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .feature {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .logo span {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
+}
+
+.game {
+    margin-top: 30px;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown menu (hidden by default) */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    min-width: 160px;
+    border: 1px solid #ccc;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+/* Dropdown menu links */
+.dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effects for dropdown links */
+.dropdown-menu a:hover {
+    background-color: #8a2be2;
+    color: #fff;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Adjust positioning */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
