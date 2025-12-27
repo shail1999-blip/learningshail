@@ -99,28 +99,7 @@ body {
   font-weight: bold;
 }
 
-@media (max-width: 480px) {
-    .logo span {
-        font-size: 1.2rem;
-    }
 
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    p {
-        font-size: 0.875rem;
-    }
-
-    nav a {
-        font-size: 0.75rem;
-    }
-
-    button {
-        padding: 8px;
-        font-size: 0.75rem;
-    }
-}
 
 .game {
     margin-top: 30px;
@@ -171,4 +150,5 @@ nav {
     display: flex;
     align-items: center;
     gap: 16px;
+
 }
