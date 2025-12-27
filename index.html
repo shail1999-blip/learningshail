@@ -1,114 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" class=bckimg>
+<html lang="en">
 
 <head>
-
-
-    <link rel="shortcut icon" href="icon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <title>Digital Era Tech</title>
-
+  <meta charset="UTF-8" />
+  <title>Learn to Code</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <div>🎮</div>
-                <span>Digital Era Tech</span>
-            </div>
-            <nav>
-                <div class="dropdown">
-                    <a href="#">Games</a>
-                    <div class="dropdown-menu">
-                     <a href="tictactoe.html">Tic Tac Toe</a>
-<a href="Memory.html">Memory Game</a>
-<a href="Queenchess.html">Queen Chess</a>
-<a href="WordScramble.html">Scrambled Word</a>
-<a href="2048.html">2048</a>
-<a href="Snake.html">Hungry Snake</a>
-<a href="colorsort.html">Color sort puzzle</a>
 
-
-                    </div>
-                </div>
-
-                <a href="#">Community</a>
-                <a href="#">Tournament</a>
-                <a href="#">Support</a>
-                <button>Login</button>
-                <!-- <button>Sign Up</button> -->
-            </nav>
-        </div>
-    </header>
-    <main>
-        <div style=" padding-top: 3%;">
-            <a style="font-weight: bold; font-size:x-large ;">Level Up Your Gaming Experience</a>
-        </div>
-
-        <p>Join the ultimate gaming platform. Compete, connect, and conquer with our cutting-edge gaming technology.
-        </p>
-
-        <div class="feature">
-            <div class="feature-item" style="  background-image: url('images/tictactoeimg.webp'); 
-            background-size: cover;       
-            background-position: center;  
-            background-repeat: no-repeat; ">
-                <h3>Tic Tac Toe</h3>
-                <button class="game"><a href="learningshail/tictactoe.html">Play</a></button>
-            </div>
-            <div class="feature-item" style="  background-image: url('images/memoryimg.webp'); 
-            background-size: cover;       
-            background-position: center;  
-            background-repeat: no-repeat; ">
-                <h3>Memory Game</h3>
-                <button class="game"><a href="/learningshail/Memory.html">Play</a></button>
-            </div>
-            <div class="feature-item" style="  background-image: url('images/queenchessimg.png'); 
-            background-size: cover;       
-            background-position: center;  
-            background-repeat: no-repeat; ">
-                <h3>Queen Chess</h3>
-                <button class="game"><a href="/Queenchess.html">Play</a></button>
-            </div>
-
-            <div class="feature-item">
-                <h3>scrambled-word</h3>
-                <button class="game"><a href="/learningshail/WordScramble.html">Play</a></button>
-            </div>
-
-            <div class="feature-item">
-                <h3>2048</h3>
-                <button class="game"><a href="/learningshail/2048.html">Play</a></button>
-            </div>
-            <div class="feature-item">
-                <h3>Hungry Snake</h3>
-                <button class="game"><a href="/learningshail/Snake.html">Play</a></button>
-            </div>
-            <div class="feature-item">
-                <h3>Color sort puzzle</h3>
-                <button class="game"><a href="/learningshail/colorsort.html">Play</a></button>
-            </div>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">LearningsHail</div>
+    <nav>
+      <a href="#">NEWS</a>
+      <a href="#">Market</a>
+      <a href="https://www.timepaas.fun/">Blogs</a>
+      <a href="https://www.digitaleratech.fun">Tech blogs</a>
+      <a href="#">Python</a>
+      <a href="#">Java</a>
+      <div class="dropdown">
+        <a href="#">Games</a>
+        <div class="dropdown-menu">
+          <a href="tictactoe.html">Tic Tac Toe</a>
+          <a href="Memory.html">Memory Game</a>
+          <a href="Queenchess.html">Queen Chess</a>
+          <a href="WordScramble.html">Scrambled Word</a>
+          <a href="2048.html">2048</a>
+          <a href="Snake.html">Hungry Snake</a>
+          <a href="colorsort.html">Color sort puzzle</a>
 
         </div>
+    </nav>
+    <button class="signin">Sign In</button>
+  </header>
 
-    </main>
-    <footer>
-        <p>&copy; 2025 Digital Era Tech. All rights reserved.</p>
-        <nav>
-            <a class="open-popup-btn" href="#">Terms of Service</a>
-            <a class="show-modal-btn" href="#">Privacy Policy</a>
-            <a class="open-terms-button" href="#">Cookie Policy</a>
-        </nav>
-    </footer>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Learn to Code</h1>
+    <p>With the world's largest web developer site.</p>
 
-    <script src="script.js"></script>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search our tutorials, e.g. HTML">
+      <button onclick="searchTutorial()">🔍</button>
+    </div>
+
+    <a href="#" class="help-link">Not Sure Where To Begin?</a>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 
-
 </html>
-
-
-
-
-
