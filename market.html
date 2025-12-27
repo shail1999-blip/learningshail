@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Indian Market Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="market.html" />
+</head>
+
+<body>
+
+<header>
+  📊 Indian Stock Market Dashboard
+  <span id="marketStatus" class="status closed">Closed</span>
+</header>
+
+<div class="container">
+
+  <div class="cards">
+    <div class="card">
+      <h2>NIFTY 50</h2>
+      <div class="price" id="niftyPrice">--</div>
+      <div class="change" id="niftyChange"></div>
+    </div>
+
+    <div class="card">
+      <h2>SENSEX</h2>
+      <div class="price" id="sensexPrice">--</div>
+      <div class="change" id="sensexChange"></div>
+    </div>
+
+    <div class="card">
+      <h2>BANK NIFTY</h2>
+      <div class="price" id="bankniftyPrice">--</div>
+      <div class="change" id="bankniftyChange"></div>
+    </div>
+  </div>
+
+  <canvas id="marketChart" height="120"></canvas>
+
+</div>
+
+<footer>
+  Disclaimer: Market data is delayed by 15 minutes and is for educational and portfolio use only.
+</footer>
+
+<script src="market.js"></script>
+</body>
+</html>
