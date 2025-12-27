@@ -21,15 +21,15 @@ body {
 }
 
 .logo {
-  font-size: 50px;
+  font-size: 25px;
   font-weight: bold;
   color: #29cb05;
 }
 
 .navbar nav a {
-  margin: 0 20px;
+  margin: 0 5px;
   text-decoration: underline;
-  font-size: 25px;
+  font-size: 13px;
   color: #29cb05;
   font-weight: 1000;
 }
@@ -37,9 +37,9 @@ body {
 .signin {
   background: #04aa6d;
   border: none;
-  padding: 28px 60px;
+  padding: 13px 25px;
   color: white;
-  font-size: 36px;
+  font-size: 18px;
   border-radius: 15px;
   cursor: pointer;
 }
@@ -99,7 +99,28 @@ body {
   font-weight: bold;
 }
 
+@media (max-width: 480px) {
+    .logo span {
+        font-size: 1.2rem;
+    }
 
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.875rem;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
+}
 
 .game {
     margin-top: 30px;
@@ -145,6 +166,9 @@ body {
     display: block;
 }
 
-
-
-
+/* Adjust positioning */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
