@@ -1,10 +1,10 @@
-// const data = [
-//     {
-//         title: "Inception",
-//         rating: "8.8",
-//         type: "movie",
-//         poster: "https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg"
-//     },
+ const data = [
+//   {
+       title: "lucky bhaskar",
+      rating: "8.8",
+       type: "movie",   
+     poster: "https://1024terabox.com/s/1V6iPj_hLju7hZhvOyrUUcQ" 
+     },
 //     {
 //         title: "Interstellar",
 //         rating: "8.6",
@@ -89,3 +89,4 @@ hamburger.addEventListener("click", () => {
 
 /* Initial Load */
 displayItems(data);
+
