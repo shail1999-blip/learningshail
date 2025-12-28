@@ -13,10 +13,10 @@ const movies = [
     type: "movie"
   },
   {
-    title: "Movie Title Two",
-    meta: "2023 • English • HDRip",
-    poster: "https://via.placeholder.com/300x450?text=Poster+2",
-    link: "#",
+    title: "interstellar",
+    meta: "2014 • English • Hindi  • HDRip",
+    poster: "https://www.pinterest.com/pin/photoshop-poster-interstellar--63543044733722547/",
+    link: "https://www.timepaas.fun/2025/09/preparation-kit-for-automation-test.html",
     type: "movie"
   },
   {
@@ -78,3 +78,4 @@ searchInput.addEventListener("input", applyFilters);
 
 /* Initial Load */
 renderMovies(movies);
+
