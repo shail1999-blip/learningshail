@@ -1,92 +1,80 @@
- const data = [
-//   {
-       title: "lucky bhaskar",
-      rating: "8.8",
-       type: "movie",   
-     poster: "https://1024terabox.com/s/1V6iPj_hLju7hZhvOyrUUcQ" 
-     },
-//     {
-//         title: "Interstellar",
-//         rating: "8.6",
-//         type: "movie",
-//         poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
-//     },
-//     {
-//         title: "The Dark Knight",
-//         rating: "9.0",
-//         type: "movie",
-//         poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
-//     },
-//     {
-//         title: "Breaking Bad",
-//         rating: "9.5",
-//         type: "series",
-//         poster: "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg"
-//     },
-//     {
-//         title: "Stranger Things",
-//         rating: "8.7",
-//         type: "series",
-//         poster: "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
-//     }
-// ];
-
-const container = document.getElementById("movieContainer");
+const grid = document.getElementById("movieGrid");
 const searchInput = document.getElementById("search");
 const navButtons = document.querySelectorAll(".nav-btn");
-const hamburger = document.getElementById("hamburger");
-const mobileMenu = document.getElementById("mobileMenu");
 
 let currentType = "all";
 
-/* Display */
-function displayItems(list) {
-    container.innerHTML = "";
-    list.forEach(item => {
-        container.innerHTML += `
-            <div class="movie">
-                <img src="${item.poster}" alt="${item.title}">
-                <div class="movie-info">
-                    <h3>${item.title}</h3>
-                    <span>⭐ ${item.rating}</span>
-                </div>
-            </div>
-        `;
-    });
+const movies = [
+  {
+    title: "Lucky Bhaskar",
+    meta: "2024 • Hindi • 1080p",
+    poster:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4bxibEDwwN-eElhz9M0SgdM-KUwxUmzPlwg&s",
+    link: "https://www.digitaleratech.fun/2025/07/dopamine-detox-short-guide-to-remove.html",
+    type: "movie"
+  },
+  {
+    title: "Movie Title Two",
+    meta: "2023 • English • HDRip",
+    poster: "https://via.placeholder.com/300x450?text=Poster+2",
+    link: "#",
+    type: "movie"
+  },
+  {
+    title: "Movie Title Four",
+    meta: "Web Series • S01",
+    poster: "https://via.placeholder.com/300x450?text=Poster+4",
+    link: "#",
+    type: "series"
+  }
+];
+
+/* Render */
+function renderMovies(list) {
+  grid.innerHTML = "";
+
+  list.forEach(movie => {
+    const card = document.createElement("a");
+    card.className = "movie-card";
+    card.href = movie.link || "#";
+
+    card.innerHTML = `
+      <img src="${movie.poster}" alt="${movie.title}">
+      <div class="movie-info">
+        <div class="movie-title">${movie.title}</div>
+        <div class="movie-meta">${movie.meta}</div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
 }
 
-/* Filter Logic */
+/* Filter */
 function applyFilters() {
-    const text = searchInput.value.toLowerCase();
+  const text = searchInput.value.toLowerCase();
 
-    const filtered = data.filter(item => {
-        const matchType = currentType === "all" || item.type === currentType;
-        const matchText = item.title.toLowerCase().includes(text);
-        return matchType && matchText;
-    });
+  const filtered = movies.filter(movie => {
+    const matchType = currentType === "all" || movie.type === currentType;
+    const matchText = movie.title.toLowerCase().includes(text);
+    return matchType && matchText;
+  });
 
-    displayItems(filtered);
+  renderMovies(filtered);
 }
 
 /* Nav Buttons */
 navButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        navButtons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentType = btn.dataset.type;
-        applyFilters();
-        mobileMenu.classList.remove("show");
-    });
+  btn.addEventListener("click", () => {
+    navButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    currentType = btn.dataset.type;
+    applyFilters();
+  });
 });
 
 /* Search */
 searchInput.addEventListener("input", applyFilters);
 
-/* Hamburger */
-hamburger.addEventListener("click", () => {
-    mobileMenu.classList.toggle("show");
-});
-
 /* Initial Load */
-displayItems(data);
-
+renderMovies(movies);
