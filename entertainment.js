@@ -96,8 +96,12 @@ function applyFilters() {
   const text = searchInput.value.toLowerCase();
 
   const filtered = movies.filter(movie => {
-    const matchType = currentType === "all" || movie.type === currentType;
+    const matchType =
+      currentType === "all" ||
+      movie.type.toLowerCase() === currentType.toLowerCase();
+
     const matchText = movie.title.toLowerCase().includes(text);
+
     return matchType && matchText;
   });
 
@@ -120,5 +124,6 @@ searchInput.addEventListener("input", applyFilters);
 
 /* Initial Load */
 renderMovies(movies);
+
 
 
