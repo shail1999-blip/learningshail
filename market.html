@@ -2,50 +2,148 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Indian Market Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="market.html" />
+  <title>MarketPulse – Indian Markets Dashboard</title>
+  <link rel="stylesheet" href="market.css" />
 </head>
-
 <body>
+  <div class="app">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">MarketPulse</div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#gainers-losers">Top Movers</a>
+        <a href="#watchlist">Watchlist</a>
+      </nav>
+    </header>
 
-<header>
-  📊 Indian Stock Market Dashboard
-  <span id="marketStatus" class="status closed">Closed</span>
-</header>
+    <!-- Indian Indices (right after navbar) -->
+    <section class="indices">
+      <h2>Indian Market Indices (NSE & BSE)</h2>
+      <div class="indices-grid" id="india-indices-grid"></div>
+    </section>
 
-<div class="container">
+    <!-- Top Gainers & Losers NSE/BSE -->
+    <section class="gainers-losers" id="gainers-losers">
+      <h2>Top Gainers & Losers</h2>
 
-  <div class="cards">
-    <div class="card">
-      <h2>NIFTY 50</h2>
-      <div class="price" id="niftyPrice">--</div>
-      <div class="change" id="niftyChange"></div>
-    </div>
+      <div class="gainers-losers-grid">
+        <!-- NSE gainers -->
+        <div class="card">
+          <div class="card-header">
+            <h2>NSE Top Gainers</h2>
+          </div>
+          <table class="table" id="nse-gainers-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>LTP</th>
+                <th>Change</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
 
-    <div class="card">
-      <h2>SENSEX</h2>
-      <div class="price" id="sensexPrice">--</div>
-      <div class="change" id="sensexChange"></div>
-    </div>
+        <!-- NSE losers -->
+        <div class="card">
+          <div class="card-header">
+            <h2>NSE Top Losers</h2>
+          </div>
+          <table class="table" id="nse-losers-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>LTP</th>
+                <th>Change</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
 
-    <div class="card">
-      <h2>BANK NIFTY</h2>
-      <div class="price" id="bankniftyPrice">--</div>
-      <div class="change" id="bankniftyChange"></div>
-    </div>
+        <!-- BSE gainers -->
+        <div class="card">
+          <div class="card-header">
+            <h2>BSE Top Gainers</h2>
+          </div>
+          <table class="table" id="bse-gainers-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>LTP</th>
+                <th>Change</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- BSE losers -->
+        <div class="card">
+          <div class="card-header">
+            <h2>BSE Top Losers</h2>
+          </div>
+          <table class="table" id="bse-losers-table">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>LTP</th>
+                <th>Change</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Watchlist & Search -->
+    <main class="main-grid" id="watchlist">
+      <section class="card">
+        <div class="card-header">
+          <h2>Watchlist</h2>
+        </div>
+        <table class="table" id="watchlist-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>LTP</th>
+              <th>Change</th>
+              <th>%</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Search Stock</h2>
+        </div>
+        <div class="search-row">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Enter NSE/BSE symbol e.g. RELIANCE, TCS, SBIN"
+          />
+          <button id="search-btn">Add</button>
+        </div>
+        <div id="search-result" class="search-result"></div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Demo data only. Connect real NSE/BSE APIs later.</span>
+    </footer>
   </div>
 
-  <canvas id="marketChart" height="120"></canvas>
-
-</div>
-
-<footer>
-  Disclaimer: Market data is delayed by 15 minutes and is for educational and portfolio use only.
-</footer>
-
-<script src="market.js"></script>
+  <script src="market.js"></script>
 </body>
 </html>
