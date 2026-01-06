@@ -1,95 +1,254 @@
-// MARKET OPEN / CLOSE LOGIC (IST)
-function updateMarketStatus() {
-  const statusEl = document.getElementById("marketStatus");
+// ========= CONFIG =========
+// Frontend will call your Render backend, which returns JSON like:
+// { symbol, price, change, changePct }
 
-  const now = new Date();
+// Indian indices (demo symbols – your backend should understand them if you want).
+const indiaIndices = [
+  { name: "NIFTY 50", symbol: "NIFTYBEES" },
+  { name: "NIFTY Bank", symbol: "BANKBEES" },
+  { name: "SENSEX (ETF)", symbol: "SENSEXETF" }
+];
 
-  // Convert to IST
-  const istTime = new Date(
-    now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
-  );
+// Watchlist (Indian stocks or any you support on backend)
+let watchlist = ["RELIANCE", "TCS", "HDFCBANK", "SBIN"];
 
-  const hours = istTime.getHours();
-  const minutes = istTime.getMinutes();
-  const day = istTime.getDay(); // 0 = Sunday, 6 = Saturday
+// Top movers arrays – still mock on frontend
+let nseGainers = [];
+let nseLosers = [];
+let bseGainers = [];
+let bseLosers = [];
 
-  // Market closed on weekends
-  if (day === 0 || day === 6) {
-    setClosed(statusEl);
-    return;
-  }
-
-  // Market hours: 9:15 AM to 3:30 PM IST
-  const marketOpen =
-    (hours > 9 || (hours === 9 && minutes >= 15)) &&
-    (hours < 15 || (hours === 15 && minutes <= 30));
-
-  if (marketOpen) {
-    statusEl.textContent = "Open";
-    statusEl.className = "status open";
-  } else {
-    setClosed(statusEl);
-  }
-}
-
-function setClosed(el) {
-  el.textContent = "Closed";
-  el.className = "status closed";
-}
-
-// Update every minute
-updateMarketStatus();
-setInterval(updateMarketStatus, 60000);
-
-// ------------------------------
-// INDEX DATA (DELAYED)
-async function loadIndexData() {
-  const url =
-    "https://query1.finance.yahoo.com/v7/finance/quote?symbols=^NSEI,^BSESN,^NSE ";
-
-  const res = await fetch(url);
+// ========= fetchQuote: calls Render backend =========
+async function fetchQuote(symbol) {
+  const res = await fetch(
+    "https://indian-market-backend.onrender.com/api/quote?symbol=" +
+      encodeURIComponent(symbol)
+  ); // replace with your actual Render URL
+  if (!res.ok) throw new Error("Network error: " + res.status);
   const data = await res.json();
-  const result = data.quoteResponse.result;
 
-  result.forEach(index => {
-    const change = index.regularMarketChange;
-    const percent = index.regularMarketChangePercent.toFixed(2);
-    const cls = change >= 0 ? "positive" : "negative";
+  return {
+    symbol: data.symbol,
+    price: data.price,
+    change: data.change,
+    changePct: data.changePct
+  };
+}
 
-    if (index.symbol === "^NSEI") {
-      niftyPrice.textContent = index.regularMarketPrice;
-      niftyChange.innerHTML =
-        `<span class="${cls}">${change.toFixed(2)} (${percent}%)</span>`;
-    }
-
-    if (index.symbol === "^BSESN") {
-      sensexPrice.textContent = index.regularMarketPrice;
-      sensexChange.innerHTML =
-        `<span class="${cls}">${change.toFixed(2)} (${percent}%)</span>`;
-    }
-
-    if (index.symbol === "^NSEBANK") {
-      bankniftyPrice.textContent = index.regularMarketPrice;
-      bankniftyChange.innerHTML =
-        `<span class="${cls}">${change.toFixed(2)} (${percent}%)</span>`;
-    }
+// ========= UI helpers =========
+function formatNumber(num) {
+  if (isNaN(num)) return "-";
+  return num.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   });
 }
 
-// Static chart
-new Chart(document.getElementById("marketChart"), {
-  type: "line",
-  data: {
-    labels: ["9:15", "10:30", "11:30", "12:30", "1:30", "2:30", "3:30"],
-    datasets: [{
-      label: "NIFTY 50 (Sample)",
-      data: [22150, 22210, 22180, 22240, 22310, 22290, 22320],
-      borderWidth: 2,
-      tension: 0.4
-    }]
-  }
-});
+function changeClass(change) {
+  return change >= 0 ? "up" : "down";
+}
 
-// Load data every 5 minutes
-loadIndexData();
-setInterval(loadIndexData, 300000);
+// ========= Indian indices under navbar =========
+async function loadIndiaIndices() {
+  const container = document.getElementById("india-indices-grid");
+  if (!container) return;
+  container.innerHTML = "";
+
+  for (const idx of indiaIndices) {
+    const card = document.createElement("div");
+    card.className = "index-card";
+
+    const header = document.createElement("div");
+    header.className = "index-header";
+    header.innerHTML = `
+      <span class="index-name">${idx.name}</span>
+      <span>${idx.symbol}</span>
+    `;
+    card.appendChild(header);
+
+    const body = document.createElement("div");
+    body.className = "index-body";
+    body.innerHTML = `
+      <span class="index-price">Loading...</span>
+      <span class="index-change">--</span>
+    `;
+    card.appendChild(body);
+    container.appendChild(card);
+
+    try {
+      const q = await fetchQuote(idx.symbol);
+      body.querySelector(".index-price").textContent = formatNumber(q.price);
+      const changeText =
+        (q.change >= 0 ? "+" : "") +
+        formatNumber(q.change) +
+        " (" +
+        (q.changePct >= 0 ? "+" : "") +
+        q.changePct.toFixed(2) +
+        "%)";
+      const changeEl = body.querySelector(".index-change");
+      changeEl.textContent = changeText;
+      if (q.change < 0) changeEl.classList.add("down");
+    } catch (e) {
+      body.querySelector(".index-price").textContent = "N/A";
+      body.querySelector(".index-change").textContent = "--";
+    }
+  }
+}
+
+// ========= Top gainers/losers (still mock on frontend) =========
+function renderMoversTable(rows, tableId) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const tbody = table.querySelector("tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  rows.forEach((row) => {
+    const tr = document.createElement("tr");
+    tr.classList.add(row.change >= 0 ? "up" : "down");
+    tr.innerHTML = `
+      <td>${row.symbol}</td>
+      <td>${formatNumber(row.ltp)}</td>
+      <td>${(row.change >= 0 ? "+" : "") + row.change.toFixed(2)}</td>
+      <td>${(row.changePct >= 0 ? "+" : "") + row.changePct.toFixed(2)}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadTopMovers() {
+  function makeRow(symbol, base) {
+    const change = (Math.random() - 0.5) * (base * 0.04);
+    const ltp = base + change;
+    const changePct = (change / base) * 100;
+    return { symbol, ltp, change, changePct };
+  }
+
+  nseGainers = [
+    makeRow("RELIANCE", 3200),
+    makeRow("TCS", 4100),
+    makeRow("HDFCBANK", 1750)
+  ].sort((a, b) => b.changePct - a.changePct);
+
+  nseLosers = [
+    makeRow("INFY", 1500),
+    makeRow("ITC", 430),
+    makeRow("SBIN", 840)
+  ].sort((a, b) => a.changePct - b.changePct);
+
+  bseGainers = [
+    makeRow("BSESTK1", 500),
+    makeRow("BSESTK2", 900)
+  ].sort((a, b) => b.changePct - a.changePct);
+
+  bseLosers = [
+    makeRow("BSESTK3", 600),
+    makeRow("BSESTK4", 750)
+  ].sort((a, b) => a.changePct - b.changePct);
+
+  renderMoversTable(nseGainers, "nse-gainers-table");
+  renderMoversTable(nseLosers, "nse-losers-table");
+  renderMoversTable(bseGainers, "bse-gainers-table");
+  renderMoversTable(bseLosers, "bse-losers-table");
+}
+
+// ========= Watchlist =========
+async function loadWatchlist() {
+  const table = document.getElementById("watchlist-table");
+  if (!table) return;
+  const tbody = table.querySelector("tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+
+  for (const symbol of watchlist) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${symbol}</td>
+      <td>Loading...</td>
+      <td></td>
+      <td></td>
+    `;
+    tbody.appendChild(tr);
+
+    try {
+      const q = await fetchQuote(symbol);
+      const tds = tr.querySelectorAll("td");
+      tds[1].textContent = formatNumber(q.price);
+      tds[2].textContent =
+        (q.change >= 0 ? "+" : "") + q.change.toFixed(2);
+      tds[3].textContent =
+        (q.changePct >= 0 ? "+" : "") + q.changePct.toFixed(2) + "%";
+      tr.classList.add(changeClass(q.change));
+    } catch (e) {
+      const tds = tr.querySelectorAll("td");
+      tds[1].textContent = "N/A";
+      tds[2].textContent = "-";
+      tds[3].textContent = "-";
+    }
+  }
+}
+
+// ========= Search =========
+async function handleSearch() {
+  const input = document.getElementById("search-input");
+  const resultBox = document.getElementById("search-result");
+  const symbol = input.value.trim().toUpperCase();
+
+  if (!symbol) {
+    resultBox.textContent = "Enter a stock symbol to search.";
+    return;
+  }
+
+  resultBox.textContent = "Searching...";
+
+  try {
+    const q = await fetchQuote(symbol);
+    resultBox.innerHTML = `
+      <div>
+        <span class="symbol">${q.symbol}</span> •
+        <span class="price">${formatNumber(q.price)}</span>
+        <span class="${changeClass(q.change)}">
+          ${(q.change >= 0 ? "+" : "") + q.change.toFixed(2)}
+          (${(q.changePct >= 0 ? "+" : "") + q.changePct.toFixed(2)}%)
+        </span>
+        <button class="add-btn">Add to watchlist</button>
+      </div>
+    `;
+
+    const btn = resultBox.querySelector(".add-btn");
+    btn.addEventListener("click", () => {
+      if (!watchlist.includes(q.symbol)) {
+        watchlist.push(q.symbol);
+        loadWatchlist();
+      }
+    });
+  } catch (e) {
+    resultBox.textContent = "Error loading data.";
+  }
+}
+
+// ========= Auto refresh =========
+function startAutoRefresh() {
+  loadIndiaIndices();
+  loadTopMovers();
+  loadWatchlist();
+
+  setInterval(() => {
+    loadIndiaIndices();
+    loadTopMovers();
+    loadWatchlist();
+  }, 60000);
+}
+
+// ========= Init =========
+window.addEventListener("DOMContentLoaded", () => {
+  startAutoRefresh();
+  document
+    .getElementById("search-btn")
+    .addEventListener("click", handleSearch);
+  document
+    .getElementById("search-input")
+    .addEventListener("keydown", (e) => {
+      if (e.key === "Enter") handleSearch();
+    });
+});
