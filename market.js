@@ -21,7 +21,7 @@ let bseLosers = [];
 // ========= fetchQuote: calls Render backend =========
 async function fetchQuote(symbol) {
   const res = await fetch(
-    "https://indian-market-backend.onrender.com/api/quote?symbol=" +
+    "https://market-backend-r4jk.onrender.com" +
       encodeURIComponent(symbol)
   ); // replace with your actual Render URL
   if (!res.ok) throw new Error("Network error: " + res.status);
@@ -252,3 +252,4 @@ window.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Enter") handleSearch();
     });
 });
+
