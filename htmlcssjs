@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> LH Compiler</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+        }
+
+        .topbar {
+            background: #020617;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .run { background: #22c55e; color: white; }
+        .clear { background: #ef4444; color: white; }
+        .download { background: #3b82f6; color: white; }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 50px);
+        }
+
+        textarea {
+            width: 50%;
+            background: #020617;
+            color: #22c55e;
+            border: none;
+            padding: 15px;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+        }
+
+        iframe {
+            width: 50%;
+            border: none;
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <button class="run" onclick="runCode()">▶ Run</button>
+    <button class="clear" onclick="clearCode()">🧹 Clear</button>
+    <button class="download" onclick="downloadCode()">⬇ Download</button>
+</div>
+
+<div class="container">
+    <textarea id="code"><!DOCTYPE html>
+<html>
+<head>
+<style>
+body { background-color: lightblue; }
+h1 { color: red; }
+</style>
+</head>
+<body>
+
+<h1>Hello Shailesh 🚀</h1>
+<p>This is your online compiler</p>
+
+<script>
+console.log("JS Running...");
+</script>
+
+</body>
+</html></textarea>
+
+    <iframe id="output"></iframe>
+</div>
+
+<script>
+
+function runCode() {
+    const code = document.getElementById("code").value;
+    const output = document.getElementById("output");
+
+    // Reset iframe before loading new code
+    output.srcdoc = "";
+    setTimeout(() => {
+        output.srcdoc = code;
+    }, 100);
+}
+
+function clearCode() {
+    document.getElementById("code").value = "";
+    document.getElementById("output").srcdoc = "";
+}
+
+function downloadCode() {
+    const code = document.getElementById("code").value;
+    const blob = new Blob([code], { type: "text/html" });
+    const a = document.createElement("a");
+
+    a.href = URL.createObjectURL(blob);
+    a.download = "index.html";
+    a.click();
+}
+
+</script>
+
+</body>
+</html>
